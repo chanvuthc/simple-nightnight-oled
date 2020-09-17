@@ -1,27 +1,110 @@
-#container {
-  text-align: center;
-
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  transform: translateY(-50%);
+@mixin icon($size: 31px, $radius: 50%) {
+  height: $size;
+  border-radius: $radius;
+  @include fixed-width($size);
 }
 
-#container strong {
-  font-size: 20px;
-  line-height: 26px;
+@mixin fixed-width($width: 0px) {
+  min-width: $width;
+  max-width: $width;
 }
 
-#container p {
-  font-size: 16px;
-  line-height: 22px;
-
-  color: #8c8c8c;
-
-  margin: 0;
+%flex-center {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
 }
 
-#container a {
-  text-decoration: none;
+.container {
+  background: black;
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+
+  .top,
+  .bot {
+    width: 100%;
+    height: 49%;
+    position: absolute;
+    transition: all 500ms;
+    background: var(--color);
+    opacity: 0;
+  }
+
+  .top {
+    top: 0px;
+  }
+
+  .bot {
+    bottom: 0px;
+  }
+
+  .active {
+    opacity: 1;
+  }
+
+  .settings {
+    position: absolute;
+    cursor: pointer;
+    right: 10px;
+    border-radius: 11px;
+    font-size: 20px;
+    color: #8C8C8C;
+    font-weight: 900;
+    background-color: white;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.14);
+    z-index: 999;
+    padding: 10px;
+  }
+
+  .font-color-picker-button {
+    height: 31px;
+    width: 70px;
+    top: 10px;
+
+    @extend %flex-center;
+
+    .img {
+      height: 24px;
+      width: 24px;
+      padding: 2px;
+    }
+
+    .color-wrapper {
+      overflow: hidden;
+      @include icon(20px);
+      margin: 7px;
+      @extend %flex-center;
+
+      input {
+        cursor: pointer;
+        min-width: 20px;
+      }
+    }
+  }
+
+  .timer {
+    top: 80px;
+    width: 300px;
+  }
+}
+
+input:focus {
+  outline: none;
+}
+
+[type='color'] {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  padding: 0;
+  border: none;
+}
+
+[type='color']::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+[type='color']::-webkit-color-swatch {
+  border: none;
 }

@@ -1,20 +1,36 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<div
+  (click)="showSettings()"
+  class="container"
+  [style]="'--color: ' + activeColor"
+>
+  <div class="top" [class.active]="!isTopActive"></div>
+  <div class="bot" [class.active]="isTopActive"></div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ng-container *ngIf="isShowSettings">
+    <label class="settings font-color-picker-button">
+      <img class="img" src="/assets/icon/color-droplet.svg" />
+      <div class="color-wrapper">
+        <input
+          id="fontColorPicker"
+          type="color"
+          name="color"
+          [(ngModel)]="activeColor"
+        />
+      </div>
+    </label>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
-</ion-content>
+    <div class="settings timer">
+      <ion-range
+        min="1"
+        max="300"
+        pin
+        [(ngModel)]="switchDuration"
+        (ngModelChange)="updateInterval()"
+        color="secondary"
+      >
+        <ion-icon slot="start" size="small" name="timer-outline"></ion-icon>
+        <ion-icon slot="end" name="timer-outline"></ion-icon>
+      </ion-range>
+    </div>
+  </ng-container>
+</div>
